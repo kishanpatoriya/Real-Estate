@@ -669,6 +669,15 @@ app.post('/api/payment/create-order', async (req, res) => {
 const authRoutes = require('./auth.routes');
 app.use('/api/auth', authRoutes);
 
+// Serve React frontend
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// React SPA fallback
+app.use((req, res, next) => {
+  if (req.method !== 'GET') return next();
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
