@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 //   image: { type: String, required: true },
 //   description: { type: String },
 // }, { timestamps: true });
+
 const propertySchema = new mongoose.Schema({
   title: String,
   price: Number,
