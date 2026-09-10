@@ -6,9 +6,9 @@ const multer = require('multer');
 const path = require('path');
 require('dotenv').config();
 
-const User = require('./models/user');
-const Property = require('./models/property');
-const Booking = require('./models/booking');
+const User = require('./models/User');
+const Property = require('./models/Property');
+const Booking = require('./models/Booking');
 
 // --- NEWSLETTER SCHEMA & MODEL ---
 const newsletterSchema = new mongoose.Schema({
