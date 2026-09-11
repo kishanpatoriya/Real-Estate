@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const User = require('./models/User');
@@ -171,7 +172,7 @@ app.post('/api/agents/register', async (req, res) => {
   }
 });
 
-// User & Admin Login (Deleted users cannot login)
+// User & Admin Login
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -364,7 +365,7 @@ app.delete('/api/agents/:id', async (req, res) => {
   }
 });
 
-// --- CLIENT USER MANAGEMENT (ADMIN VIEW & DELETE) ---
+// --- CLIENT USER MANAGEMENT ---
 
 app.get('/api/users', async (req, res) => {
   try {
@@ -414,20 +415,16 @@ app.post('/api/properties', upload.array('images', 5), async (req, res) => {
     if (agentEmail && agentEmail !== 'admin@gmail.com' && agentEmail !== 'admin@rumh.com') {
       finalAgentName = agentName || 'Authorized Agent';
 
-      // --- SUBSCRIPTION PLAN & PROPERTY LIMIT CHECK ---
       const agent = await User.findOne({ email: agentEmail });
       if (agent && agent.role === 'agent') {
         const existingCount = await Property.countDocuments({ agentEmail: agent.email });
 
-        // Plan 1: Free Plan (Max 1 property)
         if (agent.membershipPlan === 'free' && existingCount >= 1) {
           return res.status(403).json({ message: 'Free Plan limit reached! You can only upload 1 property. Please upgrade your plan.' });
         }
-        // Plan 2: Standard Plan (Max 5 properties)
         if (agent.membershipPlan === 'standard' && existingCount >= 5) {
           return res.status(403).json({ message: 'Standard Plan limit reached! You can only upload up to 5 properties. Please upgrade to Premium.' });
         }
-        // Plan 3: Premium (Unlimited - No restriction check needed)
       }
     }
 
@@ -621,7 +618,7 @@ app.put('/api/users/:email', async (req, res) => {
   }
 });
 
-// Update Agent Subscription Plan & Limits (Updated to support email or ID)
+// Update Agent Subscription Plan
 app.put('/api/agents/plan/:identifier', async (req, res) => {
   try {
     const { membershipPlan, propertyLimit, badgeType } = req.body;
@@ -656,7 +653,7 @@ app.post('/api/payment/create-order', async (req, res) => {
     
     res.status(200).json({
       id: "order_" + Math.random().toString(36).substring(7),
-      amount: amount * 100, // amount in paise
+      amount: amount * 100,
       currency: "INR",
       receipt: `receipt_${planType}_1`
     });
@@ -669,25 +666,32 @@ app.post('/api/payment/create-order', async (req, res) => {
 const authRoutes = require('./auth.routes');
 app.use('/api/auth', authRoutes);
 
-// Serve React frontend (static files from Vite build)
-app.use(express.static(path.join(__dirname, '../client/dist')));
+// --- STATIC ASSETS & REACT SPA FALLBACK CONFIGURATION ---
 
-// React SPA fallback - serve index.html for all non-API routes
-app.use((req, res, next) => {
-  // Don't process API routes through SPA fallback
-  if (req.path.startsWith('/api/')) {
+// Auto-detect production build folder (supports both ../client/dist and ./dist structures)
+let distPath = path.resolve(__dirname, '../client/dist');
+if (!fs.existsSync(distPath)) {
+  distPath = path.resolve(__dirname, 'client/dist');
+}
+if (!fs.existsSync(distPath)) {
+  distPath = path.resolve(__dirname, 'dist');
+}
+
+console.log("Serving static frontend from:", distPath);
+app.use(express.static(distPath));
+
+// React SPA fallback: catch-all GET route for client-side routing
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
     return next();
   }
-  // Only serve index.html for GET requests
-  if (req.method !== 'GET') {
-    return next();
+
+  const indexPath = path.join(distPath, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    return res.sendFile(indexPath);
   }
-  // Serve index.html for all other frontend routes
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
-    if (err) {
-      res.status(404).json({ message: 'Not Found' });
-    }
-  });
+
+  res.status(500).send("Frontend build index.html not found! Verify Render build command: npm install && cd client && npm install && npm run build && cd ..");
 });
 
 const PORT = process.env.PORT || 5000;
