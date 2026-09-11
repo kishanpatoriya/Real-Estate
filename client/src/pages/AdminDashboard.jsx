@@ -70,7 +70,7 @@ export default function AdminDashboard() {
 
   const fetchProperties = async () => {
     try {
-      const response = await axios.get('https://real-estate-1azb.onrender.com/api/properties');
+      const response = await axios.get('https://real-estate-5-hello.onrender.com/api/properties');
       setProperties(response.data);
     } catch (err) {
       console.error("Error fetching properties:", err);
@@ -79,7 +79,7 @@ export default function AdminDashboard() {
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get('https://real-estate-1azb.onrender.com/api/bookings');
+      const response = await axios.get('https://real-estate-5-hello.onrender.com/api/bookings');
       setBookings(response.data);
     } catch (err) {
       console.error("Error fetching bookings:", err);
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
 
   const fetchInquiries = async () => {
     try {
-      const response = await axios.get('https://real-estate-1azb.onrender.com/api/contact');
+      const response = await axios.get('https://real-estate-5-hello.onrender.com/api/contact');
       setInquiries(response.data);
     } catch (err) {
       console.error("Error fetching inquiries:", err);
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
 
   const fetchSubscribers = async () => {
     try {
-      const response = await axios.get('https://real-estate-1azb.onrender.com/api/newsletter');
+      const response = await axios.get('https://real-estate-5-hello.onrender.com/api/newsletter');
       setSubscribers(response.data);
     } catch (err) {
       console.error("Error fetching subscribers:", err);
@@ -106,7 +106,7 @@ export default function AdminDashboard() {
 
   const fetchAgents = async () => {
     try {
-      const response = await axios.get('https://real-estate-1azb.onrender.com/api/agents');
+      const response = await axios.get('https://real-estate-5-hello.onrender.com/api/agents');
       setAgents(response.data.map(ag => ({
         id: ag._id || ag.id,
         name: ag.name,
@@ -128,7 +128,7 @@ export default function AdminDashboard() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('https://real-estate-1azb.onrender.com/api/users');
+      const response = await axios.get('https://real-estate-5-hello.onrender.com/api/users');
       setUsersList(response.data);
     } catch (err) {
       console.error("Error fetching users:", err);
@@ -148,7 +148,7 @@ export default function AdminDashboard() {
     }
 
     try {
-      await axios.put(`https://real-estate-1azb.onrender.com/api/agents/plan/${agentEmail}`, {
+      await axios.put(`https://real-estate-5-hello.onrender.com/api/agents/plan/${agentEmail}`, {
         membershipPlan: planType,
         propertyLimit: limit,
         badgeType: badge,
@@ -183,7 +183,7 @@ export default function AdminDashboard() {
     }
 
     try {
-      await axios.post('https://real-estate-1azb.onrender.com/api/properties', data, {
+      await axios.post('https://real-estate-5-hello.onrender.com/api/properties', data, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       alert('Estate published successfully!');
@@ -198,7 +198,7 @@ export default function AdminDashboard() {
 
   const handleUpdateBookingStatus = async (id, status) => {
     try {
-      await axios.put(`https://real-estate-1azb.onrender.com/api/bookings/${id}`, { status });
+      await axios.put(`https://real-estate-5-hello.onrender.com/api/bookings/${id}`, { status });
       fetchBookings();
       alert(`Tour booking status marked as ${status}!`);
     } catch (err) {
@@ -209,7 +209,7 @@ export default function AdminDashboard() {
   const handleDeleteBooking = async (id) => {
     if (window.confirm("Are you sure you want to permanently delete this client tour booking?")) {
       try {
-        await axios.delete(`https://real-estate-1azb.onrender.com/api/bookings/${id}`);
+        await axios.delete(`https://real-estate-5-hello.onrender.com/api/bookings/${id}`);
         fetchBookings();
         alert("Booking tour record permanently deleted!");
       } catch (err) {
@@ -222,7 +222,7 @@ export default function AdminDashboard() {
   const handleDelete = async (id) => {
     if (window.confirm("Remove this property? It will also remove all walkthrough bookings for this estate.")) {
       try {
-        await axios.delete(`https://real-estate-1azb.onrender.com/api/properties/${id}`);
+        await axios.delete(`https://real-estate-5-hello.onrender.com/api/properties/${id}`);
         fetchProperties();
         fetchBookings();
       } catch (err) {
@@ -234,7 +234,7 @@ export default function AdminDashboard() {
   const handleDeleteAgent = async (id) => {
     if (window.confirm("Are you sure? Removing this agent will permanently delete the agent, all their properties, and all scheduled walkthrough bookings.")) {
       try {
-        await axios.delete(`https://real-estate-1azb.onrender.com/api/agents/${id}`);
+        await axios.delete(`https://real-estate-5-hello.onrender.com/api/agents/${id}`);
         fetchAgents();
         fetchProperties();
         fetchBookings();
@@ -249,7 +249,7 @@ export default function AdminDashboard() {
   const handleDeleteUser = async (id) => {
     if (window.confirm("Are you sure you want to delete this Client Member? Their account and all their tour bookings will be permanently removed.")) {
       try {
-        await axios.delete(`https://real-estate-1azb.onrender.com/api/users/${id}`);
+        await axios.delete(`https://real-estate-5-hello.onrender.com/api/users/${id}`);
         fetchUsers();
         fetchBookings();
         alert("Client member and all their tour bookings removed successfully!");
@@ -262,14 +262,14 @@ export default function AdminDashboard() {
 
   const handleDeleteInquiry = async (id) => {
     if (window.confirm("Delete inquiry?")) {
-      await axios.delete(`https://real-estate-1azb.onrender.com/api/contact/${id}`);
+      await axios.delete(`https://real-estate-5-hello.onrender.com/api/contact/${id}`);
       fetchInquiries();
     }
   };
 
   const handleDeleteSubscriber = async (id) => {
     if (window.confirm("Remove subscriber?")) {
-      await axios.delete(`https://real-estate-1azb.onrender.com/api/newsletter/${id}`);
+      await axios.delete(`https://real-estate-5-hello.onrender.com/api/newsletter/${id}`);
       fetchSubscribers();
     }
   };

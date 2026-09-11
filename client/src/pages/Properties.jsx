@@ -15,7 +15,7 @@ export default function Properties() {
 
   const fetchProperties = async () => {
     try {
-      const response = await axios.get('https://real-estate-1azb.onrender.com/api/properties');
+      const response = await axios.get('https://real-estate-5-hello.onrender.com/api/properties');
       setProperties(response.data);
       setLoading(false);
     } catch (err) {

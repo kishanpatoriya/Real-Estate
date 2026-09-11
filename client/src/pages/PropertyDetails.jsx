@@ -45,7 +45,7 @@ export default function PropertyDetails() {
 
   const fetchPropertyDetails = async () => {
     try {
-      const res = await axios.get(`https://real-estate-1azb.onrender.com/api/properties`);
+      const res = await axios.get(`https://real-estate-5-hello.onrender.com/api/properties`);
       const found = res.data.find(p => p._id === id);
       setProperty(found);
       if (found) {
@@ -111,7 +111,7 @@ export default function PropertyDetails() {
     e.preventDefault();
     if (validateBooking()) {
       try {
-        await axios.post('https://real-estate-1azb.onrender.com/api/bookings', {
+        await axios.post('https://real-estate-5-hello.onrender.com/api/bookings', {
           ...bookingData,
           propertyId: id,
           propertyTitle: property.title,

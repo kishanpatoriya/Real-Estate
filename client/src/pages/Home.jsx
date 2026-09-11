@@ -20,7 +20,7 @@ export default function Home() {
 
   const fetchFeaturedProperties = async () => {
     try {
-      const response = await axios.get('https://real-estate-1azb.onrender.com/api/properties');
+      const response = await axios.get('https://real-estate-5-hello.onrender.com/api/properties');
       setProperties(response.data.slice(0, 3));
       setLoading(false);
     } catch (err) {
@@ -57,7 +57,7 @@ export default function Home() {
     const { targetEmail, planType, limit, badge, priceInINR } = selectedPlanDetails;
     
     try {
-      const response = await axios.put(`https://real-estate-1azb.onrender.com/api/agents/plan/${targetEmail}`, {
+      const response = await axios.put(`https://real-estate-5-hello.onrender.com/api/agents/plan/${targetEmail}`, {
         membershipPlan: planType,
         propertyLimit: limit,
         badgeType: badge,
@@ -75,7 +75,7 @@ export default function Home() {
 
   const updatePlanInBackend = async (email, planType, limit, badge) => {
     try {
-      const response = await axios.put(`https://real-estate-1azb.onrender.com/api/agents/plan/${email}`, {
+      const response = await axios.put(`https://real-estate-5-hello.onrender.com/api/agents/plan/${email}`, {
         membershipPlan: planType,
         propertyLimit: limit,
         badgeType: badge

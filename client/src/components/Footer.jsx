@@ -11,7 +11,7 @@ export default function Footer() {
     if (!email.trim()) return;
 
     try {
-      await axios.post('https://real-estate-1azb.onrender.com/api/newsletter', { email });
+      await axios.post('https://real-estate-5-hello.onrender.com/api/newsletter', { email });
       alert('Subscribed successfully!');
       setEmail('');
     } catch (err) {

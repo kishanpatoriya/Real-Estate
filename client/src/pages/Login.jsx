@@ -28,8 +28,8 @@ export default function Login() {
 
     try {
       const endpoint = loginType === 'agent' 
-        ? 'https://real-estate-1azb.onrender.com/api/agents/login' 
-        : 'https://real-estate-1azb.onrender.com/api/auth/login';
+        ? 'https://real-estate-5-hello.onrender.com/api/agents/login' 
+        : 'https://real-estate-5-hello.onrender.com/api/auth/login';
 
       const response = await axios.post(endpoint, { email, password });
       
@@ -55,7 +55,7 @@ export default function Login() {
     setModalError('');
     setLoading(true);
     try {
-      await axios.post('https://real-estate-1azb.onrender.com/api/auth/forgot-password', { email: forgotEmail });
+      await axios.post('https://real-estate-5-hello.onrender.com/api/auth/forgot-password', { email: forgotEmail });
       setLoading(false);
       setForgotStep(2);
       setModalMessage('OTP sent successfully to your registered email.');
@@ -70,7 +70,7 @@ export default function Login() {
     setModalError('');
     setLoading(true);
     try {
-      await axios.post('https://real-estate-1azb.onrender.com/api/auth/verify-otp', { email: forgotEmail, otp });
+      await axios.post('https://real-estate-5-hello.onrender.com/api/auth/verify-otp', { email: forgotEmail, otp });
       setLoading(false);
       setForgotStep(3);
       setModalMessage('OTP verified! Enter your new password.');
@@ -86,7 +86,7 @@ export default function Login() {
     setLoading(true);
     try {
       // Yahan email aur newPassword dono pass kiye ja rahe hain
-      await axios.post('https://real-estate-1azb.onrender.com/api/auth/reset-password', { 
+      await axios.post('https://real-estate-5-hello.onrender.com/api/auth/reset-password', { 
         email: forgotEmail, 
         newPassword 
       });

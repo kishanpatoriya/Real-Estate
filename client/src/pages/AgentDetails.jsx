@@ -26,7 +26,7 @@ export default function AgentDetails() {
     try {
       let currentAgent = null;
       try {
-        const agentRes = await axios.get(`https://real-estate-1azb.onrender.com/api/agents/${id}`);
+        const agentRes = await axios.get(`https://real-estate-5-hello.onrender.com/api/agents/${id}`);
         currentAgent = agentRes.data;
       } catch {
         const localAgents = JSON.parse(localStorage.getItem('rumh_agents')) || [];
@@ -34,7 +34,7 @@ export default function AgentDetails() {
       }
       setAgent(currentAgent);
 
-      const propsRes = await axios.get('https://real-estate-1azb.onrender.com/api/properties');
+      const propsRes = await axios.get('https://real-estate-5-hello.onrender.com/api/properties');
       const filtered = propsRes.data.filter(p => p.agentEmail === id || p.agentId === id || p.agentEmail === currentAgent?.email);
       setAgentProperties(filtered.length > 0 ? filtered : propsRes.data.slice(0, 3));
 

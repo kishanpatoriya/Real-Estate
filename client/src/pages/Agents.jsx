@@ -14,7 +14,7 @@ export default function Agents() {
 
   const fetchAgents = async () => {
     try {
-      const res = await axios.get('https://real-estate-1azb.onrender.com/api/agents');
+      const res = await axios.get('https://real-estate-5-hello.onrender.com/api/agents');
       setAgents(res.data);
     } catch (err) {
       console.error("Error fetching agents:", err);

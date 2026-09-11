@@ -83,7 +83,7 @@ export default function AgentProfile() {
 
   const fetchCurrentAgentProfile = async (email) => {
     try {
-      const res = await axios.get(`https://real-estate-1azb.onrender.com/api/agents/${email}`);
+      const res = await axios.get(`https://real-estate-5-hello.onrender.com/api/agents/${email}`);
       if (res.data) {
         const data = res.data;
         setAgent(prev => ({
@@ -121,8 +121,8 @@ export default function AgentProfile() {
   const fetchPropertiesAndBookings = async (email) => {
     try {
       const [propsRes, bookingsRes] = await Promise.all([
-        axios.get('https://real-estate-1azb.onrender.com/api/properties'),
-        axios.get('https://real-estate-1azb.onrender.com/api/bookings').catch(() => ({ data: [] }))
+        axios.get('https://real-estate-5-hello.onrender.com/api/properties'),
+        axios.get('https://real-estate-5-hello.onrender.com/api/bookings').catch(() => ({ data: [] }))
       ]);
 
       const allProps = propsRes.data || [];
@@ -151,7 +151,7 @@ export default function AgentProfile() {
 
   const handleUpdateStatus = async (id, newStatus) => {
     try {
-      await axios.put(`https://real-estate-1azb.onrender.com/api/bookings/${id}`, { status: newStatus });
+      await axios.put(`https://real-estate-5-hello.onrender.com/api/bookings/${id}`, { status: newStatus });
       alert(`Tour booking marked as ${newStatus}!`);
       
       const email = sessionStorage.getItem('email') || localStorage.getItem('email') || agent.email;
@@ -205,7 +205,7 @@ export default function AgentProfile() {
     }
 
     try {
-      await axios.post('https://real-estate-1azb.onrender.com/api/properties', data, {
+      await axios.post('https://real-estate-5-hello.onrender.com/api/properties', data, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       alert('Estate published successfully!');
@@ -221,7 +221,7 @@ export default function AgentProfile() {
   const handleDeleteProperty = async (id) => {
     if (window.confirm("Are you sure you want to remove this estate listing?")) {
       try {
-        await axios.delete(`https://real-estate-1azb.onrender.com/api/properties/${id}`);
+        await axios.delete(`https://real-estate-5-hello.onrender.com/api/properties/${id}`);
         fetchPropertiesAndBookings(agent.email);
       } catch (err) {
         console.error("Error deleting property:", err);
@@ -244,7 +244,7 @@ export default function AgentProfile() {
     };
 
     try {
-      await axios.put(`https://real-estate-1azb.onrender.com/api/agents/${agent.email}`, payload);
+      await axios.put(`https://real-estate-5-hello.onrender.com/api/agents/${agent.email}`, payload);
       sessionStorage.setItem('phone', agent.phone);
       sessionStorage.setItem('designation', agent.designation);
       sessionStorage.setItem('experience', agent.experience);
