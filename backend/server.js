@@ -35,11 +35,17 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors());
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Ensure uploads folder exists automatically on Render server
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+app.use('/uploads', express.static(uploadDir));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -668,7 +674,6 @@ app.use('/api/auth', authRoutes);
 
 // --- STATIC ASSETS & REACT SPA FALLBACK CONFIGURATION ---
 
-// Auto-detect production build folder (supports both ../client/dist and ./dist structures)
 let distPath = path.resolve(__dirname, '../client/dist');
 if (!fs.existsSync(distPath)) {
   distPath = path.resolve(__dirname, 'client/dist');
@@ -680,13 +685,10 @@ if (!fs.existsSync(distPath)) {
 console.log("Serving static frontend from:", distPath);
 app.use(express.static(distPath));
 
-// React SPA fallback: catch-all middleware for client-side routing
 app.use((req, res, next) => {
-  // Skip API and uploads routes
   if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
     return next();
   }
-  // Only handle GET requests
   if (req.method !== 'GET') {
     return next();
   }
