@@ -25,7 +25,11 @@ function App() {
   const location = useLocation();
   const isAdminSection = location.pathname.startsWith('/admin');
   const isAgentSection = location.pathname === '/agent-dashboard';
-  const isLoginSection = location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/admin-login';
+  const isLoginSection = 
+    location.pathname === '/login' || 
+    location.pathname === '/register' || 
+    location.pathname === '/admin-login' || 
+    location.pathname === '/adminlogin';
   
   const hideHeaderFooter = isAdminSection || isAgentSection || isLoginSection;
 
@@ -55,8 +59,10 @@ function App() {
         <Route path="/agent-profile" element={<AgentProfile />} />
         <Route path="/agent-plans" element={<AgentPlans />} />
 
-        {/* Admin Routes */}
+        {/* Admin Routes - Supports both /admin-login and /adminlogin */}
         <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
+
         <Route element={<AdminProtectedRoute />}>
           <Route path="/admin" element={<AdminDashboard />} />
         </Route>
