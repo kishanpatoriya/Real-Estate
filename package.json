@@ -1,7 +1,8 @@
 {
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix backend\"",
-    "start": "concurrently \"npm run start --prefix client\" \"npm run start --prefix backend\""
+    "build": "npm run build --prefix client",
+    "start": "npm run start --prefix backend"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

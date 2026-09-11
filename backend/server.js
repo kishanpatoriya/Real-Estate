@@ -669,13 +669,25 @@ app.post('/api/payment/create-order', async (req, res) => {
 const authRoutes = require('./auth.routes');
 app.use('/api/auth', authRoutes);
 
-// Serve React frontend
+// Serve React frontend (static files from Vite build)
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// React SPA fallback
+// React SPA fallback - serve index.html for all non-API routes
 app.use((req, res, next) => {
-  if (req.method !== 'GET') return next();
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+  // Don't process API routes through SPA fallback
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
+  // Only serve index.html for GET requests
+  if (req.method !== 'GET') {
+    return next();
+  }
+  // Serve index.html for all other frontend routes
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+    if (err) {
+      res.status(404).json({ message: 'Not Found' });
+    }
+  });
 });
 
 const PORT = process.env.PORT || 5000;
