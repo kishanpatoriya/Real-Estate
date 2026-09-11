@@ -12,8 +12,8 @@ export default function AdminLogin() {
     e.preventDefault();
     
     if (email === 'admin@gmail.com' && password === 'admin123') {
-      // localStorage ki jagah sessionStorage ka use karein
-      sessionStorage.setItem('isAdminLoggedIn', 'true');
+      localStorage.setItem('isAdminLoggedIn', 'true');
+      localStorage.setItem('role', 'admin');
       navigate('/admin');
     } else {
       setError('Invalid Admin Credentials! Access Denied.');
