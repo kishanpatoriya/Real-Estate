@@ -468,7 +468,7 @@ export default function AdminDashboard() {
                     {currentProperties.map((prop) => (
                       <div key={prop._id} className="bg-black/40 border border-white/5 p-4 rounded-2xl flex items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
-                          <img src={prop.image && prop.image.startsWith('http') ? prop.image : `https://real-estate-1azb.onrender.com${prop.image}`} alt={prop.title} className="w-16 h-16 object-cover rounded-xl border border-white/10" />
+                          <img src={prop.image && prop.image.startsWith('http') ? prop.image : `https://https://real-estate-5-hello.onrender.com${prop.image}`} alt={prop.title} className="w-16 h-16 object-cover rounded-xl border border-white/10" />
                           <div>
                             <h4 className="font-serif text-white text-sm">{prop.title}</h4>
                             <p className="text-xs text-slate-400 mt-0.5">
@@ -922,7 +922,7 @@ export default function AdminDashboard() {
             </button>
             <h3 className="text-xl font-serif text-white mb-4">{viewingProperty.title}</h3>
             <img 
-              src={viewingProperty.image && viewingProperty.image.startsWith('http') ? viewingProperty.image : `https://real-estate-1azb.onrender.com${viewingProperty.image}`} 
+              src={viewingProperty.image && viewingProperty.image.startsWith('http') ? viewingProperty.image : `https://https://real-estate-5-hello.onrender.com${viewingProperty.image}`} 
               alt={viewingProperty.title} 
               className="w-full h-64 object-cover rounded-2xl mb-6 border border-white/10"
             />

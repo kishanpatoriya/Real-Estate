@@ -139,7 +139,7 @@ export default function AgentDetails() {
                 <div key={prop._id || prop.id} className="bg-[#0D121D] border border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:border-amber-500/40 transition-all flex flex-col justify-between">
                   <div className="h-48 w-full bg-slate-900 relative">
                     <img 
-                      src={prop.image && prop.image.startsWith('http') ? prop.image : `https://real-estate-1azb.onrender.com${prop.image}`} 
+                      src={prop.image && prop.image.startsWith('http') ? prop.image : `https://https://real-estate-5-hello.onrender.com${prop.image}`} 
                       alt={prop.title} 
                       className="w-full h-full object-cover brightness-90" 
                     />

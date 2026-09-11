@@ -208,8 +208,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {properties.map((item) => {
               const mainImg = item.images && item.images.length > 0 
-                ? (item.images[0].startsWith('http') ? item.images[0] : `https://real-estate-1azb.onrender.com${item.images[0]}`)
-                : (item.image && item.image.startsWith('http') ? item.image : `https://real-estate-1azb.onrender.com${item.image}`);
+                ? (item.images[0].startsWith('http') ? item.images[0] : `https://https://real-estate-5-hello.onrender.com${item.images[0]}`)
+                : (item.image && item.image.startsWith('http') ? item.image : `https://https://real-estate-5-hello.onrender.com${item.image}`);
 
               return (
                 <div key={item._id} className="bg-[#0D121D] rounded-2xl overflow-hidden border border-white/10 hover:border-amber-500/40 transition-all duration-500 group flex flex-col justify-between shadow-2xl">
