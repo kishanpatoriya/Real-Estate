@@ -30,8 +30,8 @@ export default function Register() {
 
     try {
       const endpoint = registerType === 'agent'
-        ? 'http://localhost:5000/api/agents/register'
-        : 'http://localhost:5000/api/auth/register';
+        ? 'https://real-estate-1azb.onrender.com/api/agents/register'
+        : 'https://real-estate-1azb.onrender.com/api/auth/register';
 
       const payload = registerType === 'agent'
         ? {

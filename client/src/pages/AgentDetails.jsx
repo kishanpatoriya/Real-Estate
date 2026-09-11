@@ -26,7 +26,7 @@ export default function AgentDetails() {
     try {
       let currentAgent = null;
       try {
-        const agentRes = await axios.get(`http://localhost:5000/api/agents/${id}`);
+        const agentRes = await axios.get(`https://real-estate-1azb.onrender.com/api/agents/${id}`);
         currentAgent = agentRes.data;
       } catch {
         const localAgents = JSON.parse(localStorage.getItem('rumh_agents')) || [];
@@ -34,7 +34,7 @@ export default function AgentDetails() {
       }
       setAgent(currentAgent);
 
-      const propsRes = await axios.get('http://localhost:5000/api/properties');
+      const propsRes = await axios.get('https://real-estate-1azb.onrender.com/api/properties');
       const filtered = propsRes.data.filter(p => p.agentEmail === id || p.agentId === id || p.agentEmail === currentAgent?.email);
       setAgentProperties(filtered.length > 0 ? filtered : propsRes.data.slice(0, 3));
 
@@ -139,7 +139,7 @@ export default function AgentDetails() {
                 <div key={prop._id || prop.id} className="bg-[#0D121D] border border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:border-amber-500/40 transition-all flex flex-col justify-between">
                   <div className="h-48 w-full bg-slate-900 relative">
                     <img 
-                      src={prop.image && prop.image.startsWith('http') ? prop.image : `http://localhost:5000${prop.image}`} 
+                      src={prop.image && prop.image.startsWith('http') ? prop.image : `https://real-estate-1azb.onrender.com${prop.image}`} 
                       alt={prop.title} 
                       className="w-full h-full object-cover brightness-90" 
                     />

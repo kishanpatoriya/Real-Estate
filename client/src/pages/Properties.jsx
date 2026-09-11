@@ -15,7 +15,7 @@ export default function Properties() {
 
   const fetchProperties = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/properties');
+      const response = await axios.get('https://real-estate-1azb.onrender.com/api/properties');
       setProperties(response.data);
       setLoading(false);
     } catch (err) {
@@ -101,8 +101,8 @@ export default function Properties() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProperties.map((prop) => {
                 const mainImg = prop.image 
-                  ? (prop.image.startsWith('http') ? prop.image : `http://localhost:5000${prop.image}`)
-                  : (prop.images && prop.images.length > 0 ? (prop.images[0].startsWith('http') ? prop.images[0] : `http://localhost:5000${prop.images[0]}`) : 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800');
+                  ? (prop.image.startsWith('http') ? prop.image : `https://real-estate-1azb.onrender.com${prop.image}`)
+                  : (prop.images && prop.images.length > 0 ? (prop.images[0].startsWith('http') ? prop.images[0] : `https://real-estate-1azb.onrender.com${prop.images[0]}`) : 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800');
 
                 return (
                   <div key={prop._id} className="bg-[#0D121D] border border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:border-amber-500/40 transition-all duration-500 flex flex-col justify-between group">

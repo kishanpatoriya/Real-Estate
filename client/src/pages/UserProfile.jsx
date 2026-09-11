@@ -49,9 +49,9 @@ export default function UserProfile() {
   const fetchAllData = async (email) => {
     try {
       const [bookingsRes, agentsRes, propsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/bookings'),
-        axios.get('http://localhost:5000/api/agents').catch(() => ({ data: [] })),
-        axios.get('http://localhost:5000/api/properties').catch(() => ({ data: [] }))
+        axios.get('https://real-estate-1azb.onrender.com/api/bookings'),
+        axios.get('https://real-estate-1azb.onrender.com/api/agents').catch(() => ({ data: [] })),
+        axios.get('https://real-estate-1azb.onrender.com/api/properties').catch(() => ({ data: [] }))
       ]);
 
       const agentsData = agentsRes.data || [];

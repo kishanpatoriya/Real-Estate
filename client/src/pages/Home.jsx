@@ -20,7 +20,7 @@ export default function Home() {
 
   const fetchFeaturedProperties = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/properties');
+      const response = await axios.get('https://real-estate-1azb.onrender.com/api/properties');
       setProperties(response.data.slice(0, 3));
       setLoading(false);
     } catch (err) {
@@ -57,7 +57,7 @@ export default function Home() {
     const { targetEmail, planType, limit, badge, priceInINR } = selectedPlanDetails;
     
     try {
-      const response = await axios.put(`http://localhost:5000/api/agents/plan/${targetEmail}`, {
+      const response = await axios.put(`https://real-estate-1azb.onrender.com/api/agents/plan/${targetEmail}`, {
         membershipPlan: planType,
         propertyLimit: limit,
         badgeType: badge,
@@ -75,7 +75,7 @@ export default function Home() {
 
   const updatePlanInBackend = async (email, planType, limit, badge) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/agents/plan/${email}`, {
+      const response = await axios.put(`https://real-estate-1azb.onrender.com/api/agents/plan/${email}`, {
         membershipPlan: planType,
         propertyLimit: limit,
         badgeType: badge
@@ -208,8 +208,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {properties.map((item) => {
               const mainImg = item.images && item.images.length > 0 
-                ? (item.images[0].startsWith('http') ? item.images[0] : `http://localhost:5000${item.images[0]}`)
-                : (item.image && item.image.startsWith('http') ? item.image : `http://localhost:5000${item.image}`);
+                ? (item.images[0].startsWith('http') ? item.images[0] : `https://real-estate-1azb.onrender.com${item.images[0]}`)
+                : (item.image && item.image.startsWith('http') ? item.image : `https://real-estate-1azb.onrender.com${item.image}`);
 
               return (
                 <div key={item._id} className="bg-[#0D121D] rounded-2xl overflow-hidden border border-white/10 hover:border-amber-500/40 transition-all duration-500 group flex flex-col justify-between shadow-2xl">

@@ -37,7 +37,7 @@ export default function AgentPlans({ agentEmail, currentPlan, onPlanUpdated }) {
     
     try {
       setLoading(true);
-      const response = await axios.put(`http://localhost:5000/api/agents/plan/${targetEmail}`, {
+      const response = await axios.put(`https://real-estate-1azb.onrender.com/api/agents/plan/${targetEmail}`, {
         membershipPlan: planType,
         propertyLimit: limit,
         badgeType: badge,
@@ -58,7 +58,7 @@ export default function AgentPlans({ agentEmail, currentPlan, onPlanUpdated }) {
   const updatePlanInBackend = async (email, planType, limit, badge) => {
     try {
       setLoading(true);
-      const response = await axios.put(`http://localhost:5000/api/agents/plan/${email}`, {
+      const response = await axios.put(`https://real-estate-1azb.onrender.com/api/agents/plan/${email}`, {
         membershipPlan: planType,
         propertyLimit: limit,
         badgeType: badge

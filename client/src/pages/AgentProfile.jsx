@@ -83,7 +83,7 @@ export default function AgentProfile() {
 
   const fetchCurrentAgentProfile = async (email) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/agents/${email}`);
+      const res = await axios.get(`https://real-estate-1azb.onrender.com/api/agents/${email}`);
       if (res.data) {
         const data = res.data;
         setAgent(prev => ({
@@ -121,8 +121,8 @@ export default function AgentProfile() {
   const fetchPropertiesAndBookings = async (email) => {
     try {
       const [propsRes, bookingsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/properties'),
-        axios.get('http://localhost:5000/api/bookings').catch(() => ({ data: [] }))
+        axios.get('https://real-estate-1azb.onrender.com/api/properties'),
+        axios.get('https://real-estate-1azb.onrender.com/api/bookings').catch(() => ({ data: [] }))
       ]);
 
       const allProps = propsRes.data || [];
@@ -151,7 +151,7 @@ export default function AgentProfile() {
 
   const handleUpdateStatus = async (id, newStatus) => {
     try {
-      await axios.put(`http://localhost:5000/api/bookings/${id}`, { status: newStatus });
+      await axios.put(`https://real-estate-1azb.onrender.com/api/bookings/${id}`, { status: newStatus });
       alert(`Tour booking marked as ${newStatus}!`);
       
       const email = sessionStorage.getItem('email') || localStorage.getItem('email') || agent.email;
@@ -205,7 +205,7 @@ export default function AgentProfile() {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/properties', data, {
+      await axios.post('https://real-estate-1azb.onrender.com/api/properties', data, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       alert('Estate published successfully!');
@@ -221,7 +221,7 @@ export default function AgentProfile() {
   const handleDeleteProperty = async (id) => {
     if (window.confirm("Are you sure you want to remove this estate listing?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/properties/${id}`);
+        await axios.delete(`https://real-estate-1azb.onrender.com/api/properties/${id}`);
         fetchPropertiesAndBookings(agent.email);
       } catch (err) {
         console.error("Error deleting property:", err);
@@ -244,7 +244,7 @@ export default function AgentProfile() {
     };
 
     try {
-      await axios.put(`http://localhost:5000/api/agents/${agent.email}`, payload);
+      await axios.put(`https://real-estate-1azb.onrender.com/api/agents/${agent.email}`, payload);
       sessionStorage.setItem('phone', agent.phone);
       sessionStorage.setItem('designation', agent.designation);
       sessionStorage.setItem('experience', agent.experience);
@@ -662,7 +662,7 @@ export default function AgentProfile() {
                 {properties.map((prop) => (
                   <div key={prop._id} className="bg-black/40 border border-white/5 p-4 rounded-2xl flex items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                      <img src={prop.image && prop.image.startsWith('http') ? prop.image : `http://localhost:5000${prop.image}`} alt={prop.title} className="w-16 h-16 object-cover rounded-xl border border-white/10" />
+                      <img src={prop.image && prop.image.startsWith('http') ? prop.image : `https://real-estate-1azb.onrender.com${prop.image}`} alt={prop.title} className="w-16 h-16 object-cover rounded-xl border border-white/10" />
                       <div>
                         <h4 className="font-serif text-white text-sm">{prop.title}</h4>
                         <p className="text-xs text-slate-400 mt-0.5">{prop.location}</p>

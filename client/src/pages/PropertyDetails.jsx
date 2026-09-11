@@ -45,13 +45,13 @@ export default function PropertyDetails() {
 
   const fetchPropertyDetails = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/properties`);
+      const res = await axios.get(`https://real-estate-1azb.onrender.com/api/properties`);
       const found = res.data.find(p => p._id === id);
       setProperty(found);
       if (found) {
         const primaryImg = found.image 
-          ? (found.image.startsWith('http') ? found.image : `http://localhost:5000${found.image}`)
-          : (found.images && found.images.length > 0 ? (found.images[0].startsWith('http') ? found.images[0] : `http://localhost:5000${found.images[0]}`) : '');
+          ? (found.image.startsWith('http') ? found.image : `https://real-estate-1azb.onrender.com${found.image}`)
+          : (found.images && found.images.length > 0 ? (found.images[0].startsWith('http') ? found.images[0] : `https://real-estate-1azb.onrender.com${found.images[0]}`) : '');
         setActiveImage(primaryImg);
         if (found.agentName) {
           setAgentInfo(prev => ({
@@ -111,7 +111,7 @@ export default function PropertyDetails() {
     e.preventDefault();
     if (validateBooking()) {
       try {
-        await axios.post('http://localhost:5000/api/bookings', {
+        await axios.post('https://real-estate-1azb.onrender.com/api/bookings', {
           ...bookingData,
           propertyId: id,
           propertyTitle: property.title,
@@ -156,7 +156,7 @@ export default function PropertyDetails() {
   }
 
   const propertyImages = property.images && property.images.length > 0 
-    ? property.images.map(img => img.startsWith('http') ? img : `http://localhost:5000${img}`)
+    ? property.images.map(img => img.startsWith('http') ? img : `https://real-estate-1azb.onrender.com${img}`)
     : [activeImage, activeImage, activeImage];
 
   return (

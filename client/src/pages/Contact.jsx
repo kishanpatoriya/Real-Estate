@@ -63,7 +63,7 @@ export default function Contact() {
       setLoading(true);
       try {
         // 👉 Backend API call to save inquiry
-        await axios.post('http://localhost:5000/api/contact', formData);
+        await axios.post('https://real-estate-1azb.onrender.com/api/contact', formData);
         setSubmitted(true);
       } catch (err) {
         console.error("Error submitting contact inquiry:", err);
