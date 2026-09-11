@@ -680,9 +680,14 @@ if (!fs.existsSync(distPath)) {
 console.log("Serving static frontend from:", distPath);
 app.use(express.static(distPath));
 
-// React SPA fallback: catch-all GET route for client-side routing
-app.get('*', (req, res, next) => {
+// React SPA fallback: catch-all middleware for client-side routing
+app.use((req, res, next) => {
+  // Skip API and uploads routes
   if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+    return next();
+  }
+  // Only handle GET requests
+  if (req.method !== 'GET') {
     return next();
   }
 
@@ -691,7 +696,7 @@ app.get('*', (req, res, next) => {
     return res.sendFile(indexPath);
   }
 
-  res.status(500).send("Frontend build index.html not found! Verify Render build command: npm install && cd client && npm install && npm run build && cd ..");
+  res.status(500).send("Frontend build index.html not found! Verify Render build command: npm install && npm run build");
 });
 
 const PORT = process.env.PORT || 5000;
